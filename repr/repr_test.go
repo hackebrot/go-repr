@@ -36,6 +36,7 @@ func Test_toString(t *testing.T) {
 		want string
 	}{
 		{"string", "helloworld", `"helloworld"`},
+		{"stringPointer", stringPtr("helloworld"), `"helloworld"`},
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
