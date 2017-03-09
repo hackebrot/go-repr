@@ -28,3 +28,24 @@ func TestString(t *testing.T) {
 		})
 	}
 }
+
+func Test_toString(t *testing.T) {
+	tests := []struct {
+		name string
+		obj  interface{}
+		want string
+	}{
+		{"string", "helloworld", `"helloworld"`},
+	}
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			w := &bytes.Buffer{}
+			v := reflect.ValueOf(tc.obj)
+
+			toString(w, v)
+			if got := w.String(); got != tc.want {
+				t.Errorf("toString() = %v, want %v", got, tc.want)
+			}
+		})
+	}
+}
