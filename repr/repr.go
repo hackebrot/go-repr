@@ -115,6 +115,8 @@ func toString(w io.Writer, val reflect.Value) {
 		String(w, v)
 	case reflect.Slice:
 		Slice(w, v)
+	case reflect.Map:
+		Map(w, v)
 	case reflect.Struct:
 		Struct(w, v)
 	default:
