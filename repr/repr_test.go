@@ -29,6 +29,30 @@ func TestString(t *testing.T) {
 	}
 }
 
+func TestSlice_bool(t *testing.T) {
+	s := []bool{true, false, true}
+	want := `[true false true]`
+
+	w := &bytes.Buffer{}
+	Slice(w, reflect.ValueOf(s))
+
+	if got := w.String(); got != want {
+		t.Errorf("Slice() = %v, want %v", got, want)
+	}
+}
+
+func TestSlice_string(t *testing.T) {
+	s := []string{"Hello", "World", "Foo", "Bar"}
+	want := `["Hello" "World" "Foo" "Bar"]`
+
+	w := &bytes.Buffer{}
+	Slice(w, reflect.ValueOf(s))
+
+	if got := w.String(); got != want {
+		t.Errorf("Slice() = %v, want %v", got, want)
+	}
+}
+
 func Test_toString(t *testing.T) {
 	tests := []struct {
 		name string
