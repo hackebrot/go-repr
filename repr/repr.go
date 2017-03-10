@@ -96,6 +96,13 @@ func Struct(w io.Writer, v reflect.Value) {
 
 // toString writes a repr for val based on its reflect.Kind
 func toString(w io.Writer, val reflect.Value) {
+	// Check the zero value first and return early
+	// This is the case of reflect.ValueOf(nil)
+	if val == (reflect.Value{}) {
+		w.Write([]byte("<nil>"))
+		return
+	}
+
 	if val.Kind() == reflect.Ptr && val.IsNil() {
 		w.Write([]byte("<nil>"))
 		return
