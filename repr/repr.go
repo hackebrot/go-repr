@@ -28,6 +28,11 @@ func Slice(w io.Writer, v reflect.Value) {
 	w.Write([]byte{']'})
 }
 
+// Time writes a string repr of a time.Time struct to the given io.Writer
+func Time(w io.Writer, v reflect.Value) {
+	fmt.Fprintf(w, "{%s}", v.Interface())
+}
+
 // toString writes a repr for val based on its reflect.Kind
 func toString(w io.Writer, val reflect.Value) {
 	if val.Kind() == reflect.Ptr && val.IsNil() {

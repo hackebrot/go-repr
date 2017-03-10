@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestString(t *testing.T) {
@@ -72,5 +73,17 @@ func Test_toString(t *testing.T) {
 				t.Errorf("toString() = %v, want %v", got, tc.want)
 			}
 		})
+	}
+}
+
+func TestTime(t *testing.T) {
+	d := time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)
+	want := "{2017-01-02 15:04:05 +0000 UTC}"
+
+	w := &bytes.Buffer{}
+	Time(w, reflect.ValueOf(d))
+
+	if got := w.String(); got != want {
+		t.Errorf("Time() = %v, want %v", got, want)
 	}
 }
