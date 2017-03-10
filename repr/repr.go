@@ -33,6 +33,44 @@ func Time(w io.Writer, v reflect.Value) {
 	fmt.Fprintf(w, "{%s}", v.Interface())
 }
 
+// Struct writes a string repr of a struct to the given io.Writer
+func Struct(w io.Writer, v reflect.Value) {
+	if v.Type().Name() != "" {
+		w.Write([]byte(v.Type().String()))
+	}
+
+	// special handling for time.Time structs
+	if v.Type().String() == "time.Time" {
+		Time(w, v)
+		return
+	}
+
+	w.Write([]byte{'{'})
+
+	var sep bool
+	for i := 0; i < v.NumField(); i++ {
+		fv := v.Field(i)
+		if fv.Kind() == reflect.Ptr && fv.IsNil() {
+			continue
+		}
+		if fv.Kind() == reflect.Slice && fv.IsNil() {
+			continue
+		}
+
+		if sep {
+			w.Write([]byte(", "))
+		} else {
+			sep = true
+		}
+
+		w.Write([]byte(v.Type().Field(i).Name))
+		w.Write([]byte{':'})
+		toString(w, fv)
+	}
+
+	w.Write([]byte{'}'})
+}
+
 // toString writes a repr for val based on its reflect.Kind
 func toString(w io.Writer, val reflect.Value) {
 	if val.Kind() == reflect.Ptr && val.IsNil() {

@@ -1,5 +1,7 @@
 package repr
 
+import "time"
+
 // boolPtr returns a *bool for the given value
 func boolPtr(b bool) *bool {
 	return &b
@@ -13,4 +15,9 @@ func intPtr(i int) *int {
 // stringPtr returns a *string for the given value
 func stringPtr(s string) *string {
 	return &s
+}
+
+// timePtr returns a *string for the given value
+func timePtr(t time.Time) *time.Time {
+	return &t
 }

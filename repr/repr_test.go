@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+type Project struct {
+	Deprecated               *bool      `json:"deprecated,omitempty"`
+	Description              *string    `json:"description,omitempty"`
+	Forks                    *int       `json:"forks,omitempty"`
+	Keywords                 []*string  `json:"keywords,omitempty"`
+	LatestReleasePublishedAt *time.Time `json:"latest_release_published_at,omitempty"`
+	LatestStableRelease      *Release   `json:"latest_stable_release,omitempty"`
+	Versions                 []*Release `json:"versions,omitempty"`
+
+	// This is not a pointer to cover this case as well in the tests
+	Name string `json:"name,omitempty"`
+}
+
+type Release struct {
+	Number      *string    `json:"number,omitempty"`
+	PublishedAt *time.Time `json:"published_at,omitempty"`
+}
+
 func TestString(t *testing.T) {
 	tests := []struct {
 		s    string
@@ -85,5 +103,38 @@ func TestTime(t *testing.T) {
 
 	if got := w.String(); got != want {
 		t.Errorf("Time() = %v, want %v", got, want)
+	}
+}
+
+func TestStruct(t *testing.T) {
+	r := &Release{
+		Number:      stringPtr("3.0.6"),
+		PublishedAt: timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
+	}
+	p := &Project{
+		Deprecated:               boolPtr(true),
+		Description:              stringPtr("Python testing framework"),
+		Forks:                    intPtr(350),
+		Keywords:                 []*string{stringPtr("Python"), stringPtr("testing"), stringPtr("pytest")},
+		LatestReleasePublishedAt: timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
+		LatestStableRelease:      r,
+		Versions:                 []*Release{r},
+		Name:                     "pytest",
+	}
+	want := `repr.Project{` +
+		`Deprecated:true, ` +
+		`Description:"Python testing framework", ` +
+		`Forks:350, ` +
+		`Keywords:["Python" "testing" "pytest"], ` +
+		`LatestReleasePublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}, ` +
+		`LatestStableRelease:repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
+		`Versions:[repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}], ` +
+		`Name:"pytest"}`
+
+	w := &bytes.Buffer{}
+	Struct(w, reflect.ValueOf(p).Elem())
+
+	if got := w.String(); got != want {
+		t.Errorf("Struct() = %v, want %v", got, want)
 	}
 }
