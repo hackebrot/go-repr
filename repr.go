@@ -43,6 +43,7 @@ func Map(w io.Writer, v reflect.Value) {
 
 	for i, key := range v.MapKeys() {
 		if i > 0 {
+			// Separate map elements with a " " character
 			w.Write([]byte{' '})
 		}
 		toString(w, key)
