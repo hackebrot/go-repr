@@ -1,10 +1,19 @@
 package repr
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"reflect"
 )
+
+// Repr creates a string representation for the given object
+func Repr(o interface{}) string {
+	var buf bytes.Buffer
+	v := reflect.ValueOf(o)
+	toString(&buf, v)
+	return buf.String()
+}
 
 // String writes a string repr of a string to the given io.Writer
 func String(w io.Writer, v reflect.Value) {

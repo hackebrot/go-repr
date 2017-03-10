@@ -172,3 +172,85 @@ func TestStruct(t *testing.T) {
 		t.Errorf("Struct() = %v, want %v", got, want)
 	}
 }
+
+func TestRepr(t *testing.T) {
+	tests := []struct {
+		name string
+		args interface{}
+		want string
+	}{
+		{"string", "helloworld", `"helloworld"`},
+		{"string pointer", stringPtr("G'Day Mate"), `"G'Day Mate"`},
+		{"bool", false, `false`},
+		{"bool pointer", boolPtr(true), `true`},
+		{"int", 1234, `1234`},
+		{"int pointer", intPtr(404), `404`},
+		{"float32", 3.14, `3.14`},
+		{"float32 pointer", float32Ptr(3.14159), `3.14159`},
+		{"float64", 3.14, `3.14`},
+		{"float64 pointer", float64Ptr(3.14159), `3.14159`},
+		{"map", map[string]string{"hello": "world"}, `map["hello":"world"]`},
+		{"map pointer", map[*string]*bool{stringPtr("a"): boolPtr(true)}, `map["a":true]`},
+		{"slice", []string{"gopherize", "me"}, `["gopherize" "me"]`},
+		{"slice pointer", []*int{intPtr(1), intPtr(23)}, `[1 23]`},
+		{"nil", nil, `<nil>`},
+	}
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := Repr(tc.args); got != tc.want {
+				t.Errorf("Repr() = %v, want %v", got, tc.want)
+			}
+		})
+	}
+}
+
+func TestRepr_struct(t *testing.T) {
+	type Repo struct {
+		URL *string
+	}
+	type Maintainer struct {
+		AuthorName  *string
+		Email       *string
+		SocialLinks map[string]string
+	}
+	type Release struct {
+		Number       string
+		PublishedAt  *time.Time
+		Contributors []*string
+	}
+	type Project struct {
+		Name                *string
+		forks               *int
+		Keywords            []*string
+		LatestStableRelease *Release
+		repo                *Repo
+		*Maintainer
+	}
+	p := &Project{
+		stringPtr("pytest"),
+		intPtr(123),
+		[]*string{stringPtr("testing"), stringPtr("test"), nil},
+		&Release{
+			"3.0.6",
+			timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
+			nil,
+		},
+		&Repo{},
+		&Maintainer{
+			AuthorName:  stringPtr("Brianna"),
+			SocialLinks: map[string]string{"twitter": "hackebrot"},
+			Email:       nil,
+		},
+	}
+	want := `repr.Project{` +
+		`Name:"pytest", ` +
+		`Keywords:["testing" "test" <nil>], ` +
+		`LatestStableRelease:repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
+		`Repo:repr.Repo{}, ` +
+		`Maintainer:repr.Maintainer{AuthorName:"Brianna", ` +
+		`SocialLinks:map["twitter":"hackebrot"]}}`
+
+	if got := Repr(p); got != want {
+		t.Errorf("\nRepr() %8v\nwant   %8v", got, want)
+	}
+}
