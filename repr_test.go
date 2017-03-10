@@ -246,7 +246,6 @@ func TestRepr_struct(t *testing.T) {
 		`Name:"pytest", ` +
 		`Keywords:["testing" "test" <nil>], ` +
 		`LatestStableRelease:repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
-		`Repo:repr.Repo{}, ` +
 		`Maintainer:repr.Maintainer{AuthorName:"Brianna", ` +
 		`SocialLinks:map["twitter":"hackebrot"]}}`
 
