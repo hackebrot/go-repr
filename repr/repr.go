@@ -66,6 +66,13 @@ func Struct(w io.Writer, v reflect.Value) {
 	var sep bool
 	for i := 0; i < v.NumField(); i++ {
 		fv := v.Field(i)
+
+		// Ignore unexported fields
+		// and embedded unexported fields
+		if !fv.CanSet() {
+			continue
+		}
+
 		if fv.Kind() == reflect.Ptr && fv.IsNil() {
 			continue
 		}
