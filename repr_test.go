@@ -25,20 +25,20 @@ func stringPtr(s string) *string { return &s }
 // timePtr returns a *string for the given value
 func timePtr(t time.Time) *time.Time { return &t }
 
-type Project struct {
+type project struct {
 	Deprecated               *bool      `json:"deprecated,omitempty"`
 	Description              *string    `json:"description,omitempty"`
 	Forks                    *int       `json:"forks,omitempty"`
 	Keywords                 []*string  `json:"keywords,omitempty"`
 	LatestReleasePublishedAt *time.Time `json:"latest_release_published_at,omitempty"`
-	LatestStableRelease      *Release   `json:"latest_stable_release,omitempty"`
-	Versions                 []*Release `json:"versions,omitempty"`
+	LatestStableRelease      *release   `json:"latest_stable_release,omitempty"`
+	Versions                 []*release `json:"versions,omitempty"`
 
 	// This is not a pointer to cover this case as well in the tests
 	Name string `json:"name,omitempty"`
 }
 
-type Release struct {
+type release struct {
 	Number      *string    `json:"number,omitempty"`
 	PublishedAt *time.Time `json:"published_at,omitempty"`
 }
@@ -141,28 +141,28 @@ func TestTime(t *testing.T) {
 }
 
 func TestStruct(t *testing.T) {
-	r := &Release{
+	r := &release{
 		Number:      stringPtr("3.0.6"),
 		PublishedAt: timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
 	}
-	p := &Project{
+	p := &project{
 		Deprecated:               boolPtr(true),
 		Description:              stringPtr("Python testing framework"),
 		Forks:                    intPtr(350),
 		Keywords:                 []*string{stringPtr("Python"), stringPtr("testing"), stringPtr("pytest")},
 		LatestReleasePublishedAt: timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
 		LatestStableRelease:      r,
-		Versions:                 []*Release{r},
+		Versions:                 []*release{r},
 		Name:                     "pytest",
 	}
-	want := `repr.Project{` +
+	want := `repr.project{` +
 		`Deprecated:true, ` +
 		`Description:"Python testing framework", ` +
 		`Forks:350, ` +
 		`Keywords:["Python" "testing" "pytest"], ` +
 		`LatestReleasePublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}, ` +
-		`LatestStableRelease:repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
-		`Versions:[repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}], ` +
+		`LatestStableRelease:repr.release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
+		`Versions:[repr.release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}], ` +
 		`Name:"pytest"}`
 
 	w := &bytes.Buffer{}
@@ -205,48 +205,48 @@ func TestRepr(t *testing.T) {
 }
 
 func TestRepr_struct(t *testing.T) {
-	type Repo struct {
+	type repo struct {
 		URL *string
 	}
-	type Maintainer struct {
+	type maintainer struct {
 		AuthorName  *string
 		Email       *string
 		SocialLinks map[string]string
 	}
-	type Release struct {
+	type release struct {
 		Number       string
 		PublishedAt  *time.Time
 		Contributors []*string
 	}
-	type Project struct {
+	type project struct {
 		Name                *string
 		forks               *int
 		Keywords            []*string
-		LatestStableRelease *Release
-		repo                *Repo
-		*Maintainer
+		LatestStableRelease *release
+		repo                *repo
+		*maintainer
 	}
-	p := &Project{
+	p := &project{
 		stringPtr("pytest"),
 		intPtr(123),
 		[]*string{stringPtr("testing"), stringPtr("test"), nil},
-		&Release{
+		&release{
 			"3.0.6",
 			timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
 			nil,
 		},
-		&Repo{},
-		&Maintainer{
+		&repo{},
+		&maintainer{
 			AuthorName:  stringPtr("Brianna"),
 			SocialLinks: map[string]string{"twitter": "hackebrot"},
 			Email:       nil,
 		},
 	}
-	want := `repr.Project{` +
+	want := `repr.project{` +
 		`Name:"pytest", ` +
 		`Keywords:["testing" "test" <nil>], ` +
-		`LatestStableRelease:repr.Release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
-		`Maintainer:repr.Maintainer{AuthorName:"Brianna", ` +
+		`LatestStableRelease:repr.release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
+		`maintainer:repr.maintainer{AuthorName:"Brianna", ` +
 		`SocialLinks:map["twitter":"hackebrot"]}}`
 
 	if got := Repr(p); got != want {
