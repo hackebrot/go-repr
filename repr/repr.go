@@ -28,6 +28,22 @@ func Slice(w io.Writer, v reflect.Value) {
 	w.Write([]byte{']'})
 }
 
+// Map writes a string repr of a map to the given io.Writer
+func Map(w io.Writer, v reflect.Value) {
+	w.Write([]byte("map["))
+
+	for i, key := range v.MapKeys() {
+		if i > 0 {
+			w.Write([]byte{' '})
+		}
+		toString(w, key)
+		w.Write([]byte{':'})
+		toString(w, v.MapIndex(key))
+	}
+
+	w.Write([]byte{']'})
+}
+
 // Time writes a string repr of a time.Time struct to the given io.Writer
 func Time(w io.Writer, v reflect.Value) {
 	fmt.Fprintf(w, "{%s}", v.Interface())

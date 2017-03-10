@@ -78,6 +78,22 @@ func TestString(t *testing.T) {
 	}
 }
 
+func TestMap(t *testing.T) {
+	m := map[string]bool{"hello": true, "world": false}
+
+	// Map keys come back in unspecified order
+	// So we check that either want1 or want2 match
+	want1 := `map["hello":true "world":false]`
+	want2 := `map["world":false "hello":true]`
+
+	w := &bytes.Buffer{}
+	Map(w, reflect.ValueOf(m))
+
+	if got := w.String(); got != want1 && got != want2 {
+		t.Errorf("Map() = %v, want %v or %v", got, want1, want2)
+	}
+}
+
 func TestSlice_bool(t *testing.T) {
 	s := []bool{true, false, true}
 	want := `[true false true]`
