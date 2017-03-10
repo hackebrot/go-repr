@@ -83,6 +83,10 @@ func toString(w io.Writer, val reflect.Value) {
 	switch v.Kind() {
 	case reflect.String:
 		String(w, v)
+	case reflect.Slice:
+		Slice(w, v)
+	case reflect.Struct:
+		Struct(w, v)
 	default:
 		if v.CanInterface() {
 			fmt.Fprint(w, v.Interface())
