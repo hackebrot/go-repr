@@ -7,6 +7,36 @@ import (
 	"time"
 )
 
+// boolPtr returns a *bool for the given value
+func boolPtr(b bool) *bool {
+	return &b
+}
+
+// intPtr returns a *int for the given value
+func intPtr(i int) *int {
+	return &i
+}
+
+// float32Ptr returns a *float for the given value
+func float32Ptr(f float32) *float32 {
+	return &f
+}
+
+// float64Ptr returns a *float for the given value
+func float64Ptr(f float64) *float64 {
+	return &f
+}
+
+// stringPtr returns a *string for the given value
+func stringPtr(s string) *string {
+	return &s
+}
+
+// timePtr returns a *string for the given value
+func timePtr(t time.Time) *time.Time {
+	return &t
+}
+
 type Project struct {
 	Deprecated               *bool      `json:"deprecated,omitempty"`
 	Description              *string    `json:"description,omitempty"`
