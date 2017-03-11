@@ -146,7 +146,7 @@ func TestStruct(t *testing.T) {
 		PublishedAt: timePtr(time.Date(2017, 01, 02, 15, 04, 05, 0, time.UTC)),
 	}
 	p := &project{
-		Deprecated:               boolPtr(true),
+		Deprecated:               boolPtr(false),
 		Description:              stringPtr("Python testing framework"),
 		Forks:                    intPtr(350),
 		Keywords:                 []*string{stringPtr("Python"), stringPtr("testing"), stringPtr("pytest")},
@@ -156,7 +156,7 @@ func TestStruct(t *testing.T) {
 		Name:                     "pytest",
 	}
 	want := `repr.project{` +
-		`Deprecated:true, ` +
+		`Deprecated:false, ` +
 		`Description:"Python testing framework", ` +
 		`Forks:350, ` +
 		`Keywords:["Python" "testing" "pytest"], ` +
