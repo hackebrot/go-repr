@@ -6,19 +6,25 @@ COVER_FILE = coverage.out
 .PHONY: install
 install:  ##  Install library
 	@echo "+ $@"
-	@go install $(PACKAGE)
+	@go install $(PACKAGE)/repr
+
+
+.PHONY: cmd
+cmd:  ##  Install application binaries
+	@echo "+ $@"
+	@go install $(PACKAGE)/...
 
 
 .PHONY: doc
 doc:  ##  Generate documentation
 	@echo "+ $@"
-	@godoc $(PACKAGE)
+	@godoc $(PACKAGE)/repr
 
 
 .PHONY: vet
 vet:  ##  Run the go vet cmd on the package
 	@echo "+ $@"
-	@go vet $(PACKAGE)
+	@go vet $(PACKAGE)/repr
 
 
 
@@ -31,13 +37,13 @@ test:  ##  Run unit tests
 .PHONY: coverage
 coverage:  ##  Measure code coverage
 	@echo "+ $@"
-	@go test -cover $(PACKAGE)
+	@go test -cover $(PACKAGE)/repr
 
 
 .PHONY: coverage-report
 coverage-report:  ##  Generate code coverage report
 	@echo "+ $@"
-	@go test -v -coverprofile $(COVER_FILE) $(PACKAGE)
+	@go test -v -coverprofile $(COVER_FILE) $(PACKAGE)/repr
 	@go tool cover -html $(COVER_FILE)
 
 
