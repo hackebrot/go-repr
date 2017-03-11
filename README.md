@@ -145,7 +145,7 @@ By participating in this project you agree to abide by its terms.
 [contributing]: CONTRIBUTING.md
 [go-github]: https://github.com/google/go-github
 [godoc_badge]: https://img.shields.io/badge/go-documentation-blue.svg?style=flat
-[godoc]: https://godoc.org/github.com/hackebrot/go-repr (See GoDoc Reference)
+[godoc]: https://godoc.org/github.com/hackebrot/go-repr/repr (See GoDoc Reference)
 [MIT]: LICENSE
 [travis_badge]: https://img.shields.io/travis/hackebrot/go-repr.svg?style=flat
 [travis]: https://travis-ci.org/hackebrot/go-repr (See Build Status on Travis CI)
