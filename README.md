@@ -142,6 +142,7 @@ Please note that this project is released with a
 By participating in this project you agree to abide by its terms.
 
 
+[Code of Conduct]: CODE_OF_CONDUCT.md
 [contributing]: CONTRIBUTING.md
 [go-github]: https://github.com/google/go-github
 [godoc_badge]: https://img.shields.io/badge/go-documentation-blue.svg?style=flat
