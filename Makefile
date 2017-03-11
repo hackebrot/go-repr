@@ -9,12 +9,6 @@ install:  ##  Install library
 	@go install $(PACKAGE)/repr
 
 
-.PHONY: cmd
-cmd:  ##  Install application binaries
-	@echo "+ $@"
-	@go install $(PACKAGE)/...
-
-
 .PHONY: doc
 doc:  ##  Generate documentation
 	@echo "+ $@"
