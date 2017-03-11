@@ -39,10 +39,9 @@ package main
 
 import (
 	"fmt"
-
 	"time"
 
-	repr "github.com/hackebrot/go-repr"
+	"github.com/hackebrot/go-repr/repr"
 )
 
 // Maintainer of a Project
