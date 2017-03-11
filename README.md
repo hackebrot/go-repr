@@ -113,7 +113,12 @@ main.Maintainer{Name:"Tony"}], Forks:550, Platform:map["windows":true "osx":true
 
 **go-repr** is inspired by ``github.Stringify()`` of
 [google/github-go][go-github] and aims at making it easier to work with
-structs that use pointer fields.
+structs that use pointer fields. Without ``github.Stringify()`` or
+``repr.Repr()`` respectively, you would have to check for ``nil`` for all of
+your struct's pointer fields before you can derefence them one by one.
+
+**go-repr** allows you to *debug print* your objects with a single line of
+code.
 
 ## License
 
