@@ -101,7 +101,11 @@ func main() {
 Above code will generate the following output:
 
 ```text
-main.Project{Name:"Chew", Maintainers:[main.Maintainer{Name:"Amelia"} main.Maintainer{Name:"Tony"}], Forks:550, Platform:map["windows":true "osx":true "linux":true], Releases:[main.Release{PublishedAt:time.Time{2016-01-01 01:04:10 +0000 UTC}, Version:"0.1.0"} main.Release{PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}, Version:"1.0.0"}]}
+main.Project{Name:"Chew", Maintainers:[main.Maintainer{Name:"Amelia"}
+main.Maintainer{Name:"Tony"}], Forks:550, Platform:map["windows":true "osx":true 
+"linux":true], Releases:[main.Release{PublishedAt:time.Time{2016-01-01 01:04:10 
++0000 UTC}, Version:"0.1.0"} main.Release{PublishedAt:time.Time{2017-01-02 
+15:04:05 +0000 UTC}, Version:"1.0.0"}]}
 ```
 
 
