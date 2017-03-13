@@ -140,7 +140,12 @@ Please note that this project is released with a
 
 By participating in this project you agree to abide by its terms.
 
+## About
 
+I wrote about **go-repr** on [my blog][blog].
+
+
+[blog]: https://raphael.codes/blog/string-representations-for-golang-objects/
 [Code of Conduct]: CODE_OF_CONDUCT.md
 [contributing]: CONTRIBUTING.md
 [go-github]: https://github.com/google/go-github
