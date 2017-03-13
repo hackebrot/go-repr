@@ -119,6 +119,8 @@ your struct's pointer fields before you can derefence them one by one.
 **go-repr** allows you to *debug print* your objects with a single line of
 code.
 
+Read more on [my blog][blog].
+
 ## License
 
 Distributed under the terms of the [MIT License][MIT], **go-repr** is
@@ -139,10 +141,6 @@ Please note that this project is released with a
 [Contributor Code of Conduct][Code of Conduct].
 
 By participating in this project you agree to abide by its terms.
-
-## About
-
-I wrote about **go-repr** on [my blog][blog].
 
 
 [blog]: https://raphael.codes/blog/string-representations-for-golang-objects/
