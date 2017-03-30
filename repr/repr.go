@@ -7,7 +7,7 @@ import (
 	"reflect"
 )
 
-// Repr creates a string representation for the given object
+// Repr creates a string representation for the given value
 func Repr(o interface{}) string {
 	var buf bytes.Buffer
 	v := reflect.ValueOf(o)

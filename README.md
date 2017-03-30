@@ -3,7 +3,7 @@
 [![GoDoc Reference][godoc_badge]][godoc]
 [![Build Status][travis_badge]][travis]
 
-String representations of go objects
+String representations for go values
 
 ## Installation
 
@@ -12,7 +12,7 @@ String representations of go objects
 ## Usage
 
 Import **go-repr** and then use ``repr.Repr()`` to create a string
-representation for an object. It resolves pointers to their values and omits
+representation for a value. It resolves pointers to their values and omits
 unexported struct fields as well as struct fields with nil values.
 
 ```go
@@ -116,7 +116,7 @@ structs that use pointer fields. Without ``github.Stringify()`` or
 ``repr.Repr()`` respectively, you would have to check for ``nil`` for all of
 your struct's pointer fields before you can derefence them one by one.
 
-**go-repr** allows you to *debug print* your objects with a single line of
+**go-repr** allows you to *debug print* your values with a single line of
 code.
 
 Read more on [my blog][blog].
@@ -143,7 +143,7 @@ Please note that this project is released with a
 By participating in this project you agree to abide by its terms.
 
 
-[blog]: https://raphael.codes/blog/string-representations-for-golang-objects/
+[blog]: https://raphael.codes/blog/string-representations-for-go-values/
 [Code of Conduct]: CODE_OF_CONDUCT.md
 [contributing]: CONTRIBUTING.md
 [go-github]: https://github.com/google/go-github

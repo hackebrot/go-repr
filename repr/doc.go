@@ -1,4 +1,4 @@
 /*
-Package repr is a library for generating string representations of objects.
+Package repr is a library for generating string representations for values.
 */
 package repr
