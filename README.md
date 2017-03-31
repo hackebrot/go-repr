@@ -25,9 +25,8 @@ type Gopher struct {
     Eyes *string
 }
 
-h := "rainbow"
 e := "Goofy Eyes"
-g := &Gopher{Hair: &h, Eyes: &e}
+g := &Gopher{Eyes: &e}
 
 repr.Repr(g)
 ```
