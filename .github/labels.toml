@@ -6,7 +6,7 @@ description = "Bugs and problems with go-repr"
 ["code quality"]
 color = "fcc4db"
 name = "code quality"
-description = "Tasks related to linting, coding style"
+description = "Tasks related to linting, coding style and tests"
 
 [dependencies]
 color = "fcc4db"
