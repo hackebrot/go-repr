@@ -1,11 +1,11 @@
-name: Go
+name: test
 
 on: [push, pull_request]
 
 jobs:
 
-  build:
-    name: Build and test 🤖
+  test:
+    name: test 🤖
     runs-on: ubuntu-latest
     
     steps:
