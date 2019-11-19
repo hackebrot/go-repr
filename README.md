@@ -1,7 +1,7 @@
 # go-repr
 
 [![GoDoc Reference][godoc_badge]][godoc]
-[![Build Status][travis_badge]][travis]
+[![Build Status][actions_badge]][actions]
 
 String representations for Go values. 💬
 
@@ -91,5 +91,5 @@ and open source software.
 [godoc_badge]: https://img.shields.io/badge/go-documentation-blue.svg?style=flat
 [godoc]: https://godoc.org/github.com/hackebrot/go-repr/repr (See GoDoc Reference)
 [MIT]: /LICENSE
-[travis_badge]: https://img.shields.io/travis/hackebrot/go-repr.svg?style=flat
-[travis]: https://travis-ci.org/hackebrot/go-repr (See Build Status on Travis CI)
+[actions_badge]: https://github.com/hackebrot/go-repr/workflows/test/badge.svg
+[actions]: https://github.com/hackebrot/go-repr/actions (See Build Status on GitHub Actions)
