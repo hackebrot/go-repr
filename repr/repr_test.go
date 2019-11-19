@@ -208,7 +208,7 @@ func TestRepr_struct(t *testing.T) {
 	type repo struct {
 		URL *string
 	}
-	type maintainer struct {
+	type Maintainer struct {
 		AuthorName  *string
 		Email       *string
 		SocialLinks map[string]string
@@ -224,7 +224,7 @@ func TestRepr_struct(t *testing.T) {
 		Keywords            []*string
 		LatestStableRelease *release
 		repo                *repo
-		*maintainer
+		*Maintainer
 	}
 	p := &project{
 		stringPtr("pytest"),
@@ -236,7 +236,7 @@ func TestRepr_struct(t *testing.T) {
 			nil,
 		},
 		&repo{},
-		&maintainer{
+		&Maintainer{
 			AuthorName:  stringPtr("Brianna"),
 			SocialLinks: map[string]string{"twitter": "hackebrot"},
 			Email:       nil,
@@ -245,8 +245,9 @@ func TestRepr_struct(t *testing.T) {
 	want := `repr.project{` +
 		`Name:"pytest", ` +
 		`Keywords:["testing" "test" <nil>], ` +
-		`LatestStableRelease:repr.release{Number:"3.0.6", PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
-		`maintainer:repr.maintainer{AuthorName:"Brianna", ` +
+		`LatestStableRelease:repr.release{Number:"3.0.6", ` +
+		`PublishedAt:time.Time{2017-01-02 15:04:05 +0000 UTC}}, ` +
+		`Maintainer:repr.Maintainer{AuthorName:"Brianna", ` +
 		`SocialLinks:map["twitter":"hackebrot"]}}`
 
 	if got := Repr(p); got != want {
