@@ -1,7 +1,7 @@
 # Contributing
 
-Contributions are welcome, and they are greatly appreciated! Every
-little bit helps, and credit will always be given. 
+Contributions are welcome, and they are greatly appreciated! Every little bit
+helps, and credit will always be given.
 
 ## Ways to Contribute!
 
@@ -15,6 +15,6 @@ Contributions can be made in a number of ways:
 - Review [Pull Requests] and provide constructive feedback
 
 
-[documentation]: doc.go
+[documentation]: /repr/doc.go
 [issue]: https://github.com/hackebrot/go-repr/issues
 [Pull Requests]: https://github.com/hackebrot/go-repr/pulls
