@@ -45,15 +45,16 @@ type release struct {
 
 func TestString(t *testing.T) {
 	tests := []struct {
+		name string
 		s    string
 		want string
 	}{
-		{"helloworld", `"helloworld"`},
-		{"G'Day Mate", `"G'Day Mate"`},
-		{"1234", `"1234"`},
+		{"helloworld", "helloworld", `"helloworld"`},
+		{"emoji", "Firefox 🦊", `"Firefox 🦊"`},
+		{"number_string", "1234", `"1234"`},
 	}
 	for _, tc := range tests {
-		t.Run(tc.s, func(t *testing.T) {
+		t.Run(tc.name, func(t *testing.T) {
 			w := &bytes.Buffer{}
 			v := reflect.ValueOf(tc.s)
 
